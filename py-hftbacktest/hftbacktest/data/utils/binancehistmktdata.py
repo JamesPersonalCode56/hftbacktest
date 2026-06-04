@@ -87,7 +87,7 @@ def convert_snapshot(
                 if has_header:
                     continue
 
-            exch_ts = int(row[timestamp_col])
+            exch_ts = int(row[timestamp_col]) * 1_000_000  # Binance hist timestamps are in ms; engine works in ns
             local_ts = exch_ts + feed_latency
             side = 1 if row[side_col] == 'b' else -1
             price = float(row[price_col])
@@ -208,7 +208,7 @@ def convert(
                 if depth_has_header:
                     continue
 
-            exch_ts = int(row[timestamp_col])
+            exch_ts = int(row[timestamp_col]) * 1_000_000  # Binance hist timestamps are in ms; engine works in ns
             local_ts = exch_ts + feed_latency
             px = float(row[price_col])
             qty = float(row[qty_col])
@@ -264,7 +264,7 @@ def convert(
                 if trades_has_header:
                     continue
 
-            exch_ts = int(row[timestamp_col])
+            exch_ts = int(row[timestamp_col]) * 1_000_000  # Binance hist timestamps are in ms; engine works in ns
             local_ts = exch_ts + feed_latency
 
             px = float(row[price_col])
