@@ -18,7 +18,7 @@ on:
 
 env:
   PYTHON_VERSION: '3.11'
-  RUST_VERSION: '1.89'
+  RUST_VERSION: '1.91.1'
 
 permissions:
   contents: read
@@ -49,6 +49,13 @@ jobs:
           rust-toolchain: ${{ env.RUST_VERSION }}
           args: --manifest-path=py-hftbacktest/Cargo.toml --release --out dist --find-interpreter
           manylinux: 2_28
+          before-script-linux: |
+            case "${{ matrix.platform.target }}" in
+              "armv7")
+                sudo apt-get update
+                sudo apt-get install -y gcc-multilib
+                ;;
+            esac
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
@@ -80,6 +87,13 @@ jobs:
           rust-toolchain: ${{ env.RUST_VERSION }}
           args: --manifest-path=py-hftbacktest/Cargo.toml --release --out dist --find-interpreter
           manylinux: musllinux_1_2
+          before-script-linux: |
+            case "${{ matrix.platform.target }}" in
+              "armv7")
+                sudo apt-get update
+                sudo apt-get install -y gcc-multilib
+                ;;
+            esac
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
@@ -122,10 +136,10 @@ jobs:
     strategy:
       matrix:
         platform:
-          - runner: macos-13
-            target: x86_64
           - runner: macos-14
             target: aarch64
+          - runner: macos-15-intel
+            target: x86_64
     steps:
       - uses: actions/checkout@v4
         with:

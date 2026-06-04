@@ -344,21 +344,18 @@ impl Channel for IceoryxUnifiedChannel {
                     if let Some((dst_id, ev)) = ch
                         .receive()
                         .map_err(|err| BotError::Custom(err.to_string()))?
+                        && (dst_id == 0 || dst_id == id)
                     {
-                        if dst_id == 0 || dst_id == id {
-                            match &ev {
-                                LiveEvent::BatchStart
-                                | LiveEvent::BatchEnd
-                                | LiveEvent::Error(_) => {
-                                    // todo: it may cause incorrect usage.
-                                    return Ok((0, ev));
-                                }
-                                LiveEvent::Feed { symbol, .. }
-                                | LiveEvent::Order { symbol, .. }
-                                | LiveEvent::Position { symbol, .. } => {
-                                    if let Some(inst_no) = ch.symbol_to_inst_no.get(symbol) {
-                                        return Ok((*inst_no, ev));
-                                    }
+                        match &ev {
+                            LiveEvent::BatchStart | LiveEvent::BatchEnd | LiveEvent::Error(_) => {
+                                // todo: it may cause incorrect usage.
+                                return Ok((0, ev));
+                            }
+                            LiveEvent::Feed { symbol, .. }
+                            | LiveEvent::Order { symbol, .. }
+                            | LiveEvent::Position { symbol, .. } => {
+                                if let Some(inst_no) = ch.symbol_to_inst_no.get(symbol) {
+                                    return Ok((*inst_no, ev));
                                 }
                             }
                         }

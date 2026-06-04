@@ -31,6 +31,7 @@ Tutorials you’ll likely find interesting:
 * `Market Making with Alpha - Order Book Imbalance <https://hftbacktest.readthedocs.io/en/latest/tutorials/Market%20Making%20with%20Alpha%20-%20Order%20Book%20Imbalance.html>`_
 * `Market Making with Alpha - APT <https://hftbacktest.readthedocs.io/en/latest/tutorials/Market%20Making%20with%20Alpha%20-%20APT.html>`_
 * `Accelerated Backtesting <https://hftbacktest.readthedocs.io/en/latest/tutorials/Accelerated%20Backtesting.html>`_
+* `Pricing Framework <https://hftbacktest.readthedocs.io/en/latest/tutorials/Pricing%20Framework.html>`_
 
 Why Accurate Backtesting Matters — Not Just Conservative Approach
 =================================================================
@@ -199,6 +200,7 @@ Tutorials
 * `Queue-Based Market Making in Large Tick Size Assets <https://hftbacktest.readthedocs.io/en/latest/tutorials/Queue-Based%20Market%20Making%20in%20Large%20Tick%20Size%20Assets.html>`_
 * `Fusing Depth Data <https://hftbacktest.readthedocs.io/en/latest/tutorials/Fusing%20Depth%20Data.html>`_
 * `Accelerated Backtesting <https://hftbacktest.readthedocs.io/en/latest/tutorials/Accelerated%20Backtesting.html>`_
+* `Pricing Framework <https://hftbacktest.readthedocs.io/en/latest/tutorials/Pricing%20Framework.html>`_
 
 Examples
 ========
@@ -264,6 +266,6 @@ Please see the `roadmap <https://github.com/nkaz001/hftbacktest/blob/master/ROAD
     :target: https://github.com/nkaz001/hftbacktest
     :alt: Github
 
-.. |rustc| image:: https://shields.io/badge/rustc-1.89-blue
+.. |rustc| image:: https://shields.io/badge/rustc-1.90-blue
     :alt: Rust Version
     :target: https://www.rust-lang.org/

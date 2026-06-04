@@ -1,6 +1,8 @@
+#[cfg(feature = "s3")]
+use std::io::Cursor;
 use std::{
     fs::File,
-    io::{Cursor, Error, ErrorKind, Read, Write},
+    io::{Error, ErrorKind, Read, Write},
 };
 
 use crate::{
@@ -280,7 +282,7 @@ pub fn read_npy<R: Read, D: NpyDTyped + Clone>(
         return Err(Error::new(ErrorKind::InvalidData, "only 1-d is supported"));
     }
 
-    if (10 + header_len) % CACHE_LINE_SIZE != 0 {
+    if !(10 + header_len).is_multiple_of(CACHE_LINE_SIZE) {
         return Err(Error::new(
             ErrorKind::InvalidData,
             format!("Not aligned with cache line size ({CACHE_LINE_SIZE} bytes)."),
